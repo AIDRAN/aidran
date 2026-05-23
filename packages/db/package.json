@@ -1,7 +1,7 @@
 {
   "name": "@aidran/db",
-  "version": "0.1.0",
-  "description": "AIDRAN — Drizzle ORM schemas for the corpus tables (records, analysis, signals, editorial, search-sync). Public reference; production system uses additional tables not included here.",
+  "version": "0.2.0",
+  "description": "AIDRAN — Drizzle ORM schemas plus generated SQL migrations for the corpus tables (records, analysis, signals, editorial, search-sync). Public reference; production system uses additional tables not included here.",
   "keywords": [
     "aidran",
     "discourse-intelligence",
@@ -33,10 +33,15 @@
     "./schema": {
       "types": "./dist/schema/index.d.ts",
       "import": "./dist/schema/index.js"
+    },
+    "./migrations-path": {
+      "types": "./dist/migrations-path.d.ts",
+      "import": "./dist/migrations-path.js"
     }
   },
   "files": [
     "dist",
+    "migrations",
     "README.md",
     "LICENSE",
     "NOTICE"
@@ -44,7 +49,8 @@
   "scripts": {
     "typecheck": "tsc --noEmit",
     "build": "tsc",
-    "prepare": "tsc"
+    "prepare": "tsc",
+    "generate": "tsc && drizzle-kit generate"
   },
   "dependencies": {
     "drizzle-orm": "^0.36.0",
@@ -53,6 +59,7 @@
   },
   "devDependencies": {
     "@types/node": "^22.9.0",
+    "drizzle-kit": "^0.28.0",
     "typescript": "^5.7.2"
   },
   "publishConfig": {

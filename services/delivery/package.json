@@ -1,29 +1,29 @@
 {
-  "name": "@aidran/ingestion",
+  "name": "@aidran/delivery",
   "version": "0.0.0",
   "private": true,
-  "description": "AIDRAN platform scaffold — Render Workflows ingestion service (HackerNews reference implementation)",
+  "description": "AIDRAN platform scaffold — minimal Hono read-API stub for serving records and stories from the corpus. Reference implementation; production AIDRAN ships a larger surface.",
   "type": "module",
   "main": "./src/index.ts",
   "scripts": {
     "typecheck": "tsc --noEmit",
     "build": "tsc",
-    "test": "vitest run",
-    "once": "tsx src/run-once.ts"
+    "start": "tsx src/index.ts",
+    "dev": "tsx watch src/index.ts"
   },
   "dependencies": {
     "@aidran/contracts": "workspace:*",
     "@aidran/db": "workspace:*",
+    "@hono/node-server": "^1.13.7",
     "drizzle-orm": "^0.36.4",
-    "pg": "^8.13.0",
-    "zod": "^3.23.8"
+    "hono": "^4.6.13",
+    "pg": "^8.13.0"
   },
   "devDependencies": {
     "@types/node": "^22.9.0",
     "@types/pg": "^8.11.10",
     "tsx": "^4.19.2",
-    "typescript": "^5.7.2",
-    "vitest": "^2.1.8"
+    "typescript": "^5.7.2"
   },
   "license": "Apache-2.0"
 }

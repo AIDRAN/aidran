@@ -1,0 +1,58 @@
+{
+  "name": "@aidran/cli",
+  "version": "0.1.0",
+  "description": "AIDRAN — CLI for applying the @aidran/db migrations and scaffolding consumer projects",
+  "keywords": [
+    "aidran",
+    "discourse-intelligence",
+    "cli",
+    "postgres",
+    "drizzle",
+    "migrations"
+  ],
+  "homepage": "https://github.com/AIDRAN/aidran#readme",
+  "bugs": {
+    "url": "https://github.com/AIDRAN/aidran/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AIDRAN/aidran.git",
+    "directory": "packages/cli"
+  },
+  "license": "Apache-2.0",
+  "author": "AIDRAN contributors",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "bin": {
+    "aidran": "./dist/index.js"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "NOTICE"
+  ],
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "build": "tsc && chmod +x dist/index.js",
+    "prepare": "tsc && chmod +x dist/index.js"
+  },
+  "dependencies": {
+    "@aidran/db": "workspace:*",
+    "drizzle-orm": "^0.36.0",
+    "pg": "^8.13.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.9.0",
+    "@types/pg": "^8.11.10",
+    "typescript": "^5.7.2"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "engines": {
+    "node": ">=22.0.0"
+  }
+}
