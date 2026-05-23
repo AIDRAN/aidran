@@ -1,6 +1,6 @@
 {
   "name": "@aidran/contracts",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "AIDRAN — shared TypeScript types and Zod schemas for inter-service events, API DTOs, webhooks, and tier policies",
   "keywords": [
     "aidran",

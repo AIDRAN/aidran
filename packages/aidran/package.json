@@ -1,14 +1,14 @@
 {
-  "name": "@aidran/db",
+  "name": "aidran",
   "version": "0.3.0",
-  "description": "AIDRAN — Drizzle ORM schemas plus generated SQL migrations for the corpus tables (records, analysis, signals, editorial, search-sync). Public reference; production system uses additional tables not included here.",
+  "description": "AIDRAN — one install for the discourse-intelligence platform. Re-exports @aidran/contracts and @aidran/db, plus the @aidran/cli binary as `aidran`.",
   "keywords": [
     "aidran",
     "discourse-intelligence",
-    "drizzle",
+    "platform",
     "postgres",
-    "schema",
-    "typescript"
+    "drizzle",
+    "zod"
   ],
   "homepage": "https://github.com/AIDRAN/aidran#readme",
   "bugs": {
@@ -17,7 +17,7 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/AIDRAN/aidran.git",
-    "directory": "packages/db"
+    "directory": "packages/aidran"
   },
   "license": "Apache-2.0",
   "author": "AIDRAN contributors",
@@ -30,36 +30,41 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
     },
-    "./schema": {
-      "types": "./dist/schema/index.d.ts",
-      "import": "./dist/schema/index.js"
+    "./contracts": {
+      "types": "./dist/contracts.d.ts",
+      "import": "./dist/contracts.js"
     },
-    "./migrations-path": {
-      "types": "./dist/migrations-path.d.ts",
-      "import": "./dist/migrations-path.js"
+    "./db": {
+      "types": "./dist/db.d.ts",
+      "import": "./dist/db.js"
+    },
+    "./db/migrations-path": {
+      "types": "./dist/db-migrations-path.d.ts",
+      "import": "./dist/db-migrations-path.js"
     }
+  },
+  "bin": {
+    "aidran": "./bin/aidran.js"
   },
   "files": [
     "dist",
-    "migrations",
+    "bin",
     "README.md",
     "LICENSE",
     "NOTICE"
   ],
   "scripts": {
     "typecheck": "tsc --noEmit",
-    "build": "tsc",
-    "prepare": "tsc",
-    "generate": "tsc && drizzle-kit generate"
+    "build": "tsc && chmod +x bin/aidran.js",
+    "prepare": "tsc && chmod +x bin/aidran.js"
   },
   "dependencies": {
-    "drizzle-orm": "^0.36.0",
-    "pg": "^8.13.0",
-    "postgres": "^3.4.0"
+    "@aidran/cli": "workspace:*",
+    "@aidran/contracts": "workspace:*",
+    "@aidran/db": "workspace:*"
   },
   "devDependencies": {
     "@types/node": "^22.9.0",
-    "drizzle-kit": "^0.28.0",
     "typescript": "^5.7.2"
   },
   "publishConfig": {

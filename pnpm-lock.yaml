@@ -21,6 +21,25 @@ importers:
         specifier: ^2.1.8
         version: 2.1.9(@types/node@22.19.19)
 
+  packages/aidran:
+    dependencies:
+      '@aidran/cli':
+        specifier: workspace:*
+        version: link:../cli
+      '@aidran/contracts':
+        specifier: workspace:*
+        version: link:../contracts
+      '@aidran/db':
+        specifier: workspace:*
+        version: link:../db
+    devDependencies:
+      '@types/node':
+        specifier: ^22.9.0
+        version: 22.19.19
+      typescript:
+        specifier: ^5.7.2
+        version: 5.9.3
+
   packages/cli:
     dependencies:
       '@aidran/db':
