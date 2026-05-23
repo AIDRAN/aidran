@@ -1,8 +1,28 @@
 {
   "name": "@aidran/db",
-  "version": "0.0.0",
-  "description": "AIDRAN platform scaffold — Drizzle ORM schemas for the corpus tables (records, analysis, signals, editorial, search-sync). Public reference; production system uses additional tables not included here.",
+  "version": "0.1.0",
+  "description": "AIDRAN — Drizzle ORM schemas for the corpus tables (records, analysis, signals, editorial, search-sync). Public reference; production system uses additional tables not included here.",
+  "keywords": [
+    "aidran",
+    "discourse-intelligence",
+    "drizzle",
+    "postgres",
+    "schema",
+    "typescript"
+  ],
+  "homepage": "https://github.com/AIDRAN/aidran#readme",
+  "bugs": {
+    "url": "https://github.com/AIDRAN/aidran/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AIDRAN/aidran.git",
+    "directory": "packages/db"
+  },
+  "license": "Apache-2.0",
+  "author": "AIDRAN contributors",
   "type": "module",
+  "sideEffects": false,
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
@@ -15,6 +35,12 @@
       "import": "./dist/schema/index.js"
     }
   },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "NOTICE"
+  ],
   "scripts": {
     "typecheck": "tsc --noEmit",
     "build": "tsc",
@@ -29,5 +55,11 @@
     "@types/node": "^22.9.0",
     "typescript": "^5.7.2"
   },
-  "license": "Apache-2.0"
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "engines": {
+    "node": ">=22.0.0"
+  }
 }

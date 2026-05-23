@@ -1,8 +1,28 @@
 {
   "name": "@aidran/contracts",
-  "version": "0.0.0",
-  "description": "AIDRAN — shared TypeScript types for inter-service events and API DTOs",
+  "version": "0.1.0",
+  "description": "AIDRAN — shared TypeScript types and Zod schemas for inter-service events, API DTOs, webhooks, and tier policies",
+  "keywords": [
+    "aidran",
+    "discourse-intelligence",
+    "contracts",
+    "zod",
+    "typescript",
+    "types"
+  ],
+  "homepage": "https://github.com/AIDRAN/aidran#readme",
+  "bugs": {
+    "url": "https://github.com/AIDRAN/aidran/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AIDRAN/aidran.git",
+    "directory": "packages/contracts"
+  },
+  "license": "Apache-2.0",
+  "author": "AIDRAN contributors",
   "type": "module",
+  "sideEffects": false,
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
@@ -31,6 +51,12 @@
       "import": "./dist/webhooks.js"
     }
   },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "NOTICE"
+  ],
   "scripts": {
     "typecheck": "tsc --noEmit",
     "build": "tsc",
@@ -42,5 +68,11 @@
   "devDependencies": {
     "typescript": "^5.7.2"
   },
-  "license": "Apache-2.0"
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "engines": {
+    "node": ">=22.0.0"
+  }
 }

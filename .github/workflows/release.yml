@@ -1,0 +1,70 @@
+name: Release
+
+# Publishes @aidran/* packages to npm with build provenance when a v* tag is pushed.
+# Provenance requires GitHub Actions OIDC (id-token: write) and a tag on the default branch.
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  id-token: write
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    name: Publish to npm
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9.12.0
+          run_install: false
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          registry-url: "https://registry.npmjs.org"
+          cache: pnpm
+
+      - name: Install (frozen lockfile)
+        run: pnpm install --frozen-lockfile
+
+      - name: Build publishable packages
+        run: pnpm --filter "./packages/*" run build
+
+      - name: Publish to npm
+        run: pnpm --filter "./packages/*" publish --access public --provenance --no-git-checks
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_CONFIG_PROVENANCE: "true"
+
+      - name: Create GitHub Release
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with:
+          generate_release_notes: true
+          body: |
+            ## npm packages published
+
+            - [`@aidran/contracts`](https://www.npmjs.com/package/@aidran/contracts)
+            - [`@aidran/db`](https://www.npmjs.com/package/@aidran/db)
+
+            Install with `pnpm add @aidran/contracts @aidran/db` (or `npm install`). Both packages publish with [npm build provenance](https://docs.npmjs.com/generating-provenance-statements) from this commit.
+
+            See `NOTICE.md` for components intentionally omitted from the public reference.
