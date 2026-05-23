@@ -1,0 +1,82 @@
+name: Pattern or documentation improvement
+description: A correction, clarification, or addition to the pattern catalog or methodology docs.
+title: "[docs] "
+labels: ["docs", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Documentation is a first-class artifact of this repository. Improvements
+        to the pattern catalog, methodology, rough-edges callouts, and open
+        research questions are explicitly welcomed (see `CONTRIBUTING.md`).
+
+        Please **do not** propose adding documentation about AIDRAN's editorial
+        voice, prompts, rubrics, or calibration. Those are intentionally not
+        documented here (see `NOTICE.md`).
+  - type: dropdown
+    id: doc-area
+    attributes:
+      label: Which document or pattern?
+      options:
+        - "METHODOLOGY.md"
+        - "docs/patterns/ (pattern catalog)"
+        - "docs/RESEARCH-QUESTIONS.md"
+        - "docs/ROUGH-EDGES.md"
+        - "README.md"
+        - "CONTRIBUTING.md"
+        - "Inline code documentation / JSDoc"
+        - "Other (specify below)"
+    validations:
+      required: true
+  - type: input
+    id: location
+    attributes:
+      label: Specific file or section
+      placeholder: "docs/patterns/evidence-joined-signals.md, section 'Why append-only'"
+    validations:
+      required: false
+  - type: dropdown
+    id: improvement-type
+    attributes:
+      label: Type of improvement
+      options:
+        - "Factual correction"
+        - "Clarification of an existing point"
+        - "Missing context or caveat"
+        - "Honest 'rough edge' callout I think should be in docs/ROUGH-EDGES.md"
+        - "New citation or reference"
+        - "Typo, link rot, or formatting"
+    validations:
+      required: true
+  - type: textarea
+    id: current
+    attributes:
+      label: Current text or claim
+      description: Quote the passage you want to improve, with a permalink if possible.
+    validations:
+      required: true
+  - type: textarea
+    id: proposed
+    attributes:
+      label: Proposed change
+      description: |
+        Your suggested wording, the missing context you want to add, or a
+        description of the improvement. Citations welcome.
+    validations:
+      required: true
+  - type: textarea
+    id: rationale
+    attributes:
+      label: Why this matters
+      description: A sentence or two on why the current text is misleading, incomplete, or wrong.
+    validations:
+      required: false
+  - type: checkboxes
+    id: confirm
+    attributes:
+      label: Pre-submission checks
+      options:
+        - label: This concerns documentation that already exists in the public scaffold, not AIDRAN's private editorial layer.
+          required: true
+        - label: I have searched existing issues for this concern.
+          required: true

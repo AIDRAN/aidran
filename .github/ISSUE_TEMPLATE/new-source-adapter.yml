@@ -1,0 +1,85 @@
+name: New source adapter proposal
+description: Propose a new reference source adapter for the ingestion service.
+title: "[adapter] "
+labels: ["adapter", "enhancement", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        The repository ships one reference adapter (Hacker News). New adapters
+        that demonstrate the source-with-cursor task pattern against other
+        public platforms are welcomed as **reference examples**.
+
+        Before opening this issue, please confirm:
+        - The platform is public and the data is appropriate to ingest under
+          its terms of service.
+        - You are proposing an adapter that demonstrates the pattern, not one
+          tuned for a competing AI-discourse publication (see `NORMS.md`).
+        - We have not already discussed or merged this adapter.
+  - type: input
+    id: platform
+    attributes:
+      label: Source platform
+      placeholder: "e.g., Lobsters, ArXiv, a public RSS-aggregator endpoint"
+    validations:
+      required: true
+  - type: input
+    id: api-or-protocol
+    attributes:
+      label: API or protocol
+      description: Link to the public API docs, RSS spec, or protocol you'd ingest against.
+      placeholder: "https://lobste.rs/about (RSS feed)"
+    validations:
+      required: true
+  - type: textarea
+    id: cursor-model
+    attributes:
+      label: Cursor model
+      description: |
+        How does the source-with-cursor task pattern map onto this platform?
+        What does the cursor represent (max ID seen, timestamp, opaque token)?
+        What are the rate-limit and pagination characteristics?
+    validations:
+      required: true
+  - type: textarea
+    id: record-shape
+    attributes:
+      label: Record shape
+      description: |
+        Sketch of how a normalized record would look once this adapter feeds
+        into `packages/contracts` / `packages/db`. Identify which existing
+        fields apply and which would require schema extension (if any).
+    validations:
+      required: true
+  - type: dropdown
+    id: tos-review
+    attributes:
+      label: Terms of service review
+      description: Have you read the platform's ToS and confirmed reference-implementation use is permitted?
+      options:
+        - "Yes, ToS permits this use"
+        - "Yes, ToS is silent but the platform offers a public API or feed"
+        - "Not sure — would like to discuss"
+    validations:
+      required: true
+  - type: textarea
+    id: norm-check
+    attributes:
+      label: Community norm check
+      description: |
+        In one or two sentences: how does this adapter sit relative to the
+        community norm in `NORMS.md`? (Reference adapter for the pattern is
+        welcome; an adapter optimized for a competing publication is not.)
+    validations:
+      required: true
+  - type: checkboxes
+    id: confirm
+    attributes:
+      label: Pre-submission checks
+      options:
+        - label: I have read `CONTRIBUTING.md` and `NORMS.md`.
+          required: true
+        - label: I understand the maintainers may decline this proposal even if technically sound.
+          required: true
+        - label: I will sign off any resulting PR per the DCO.
+          required: false

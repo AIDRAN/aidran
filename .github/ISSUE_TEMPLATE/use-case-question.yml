@@ -1,0 +1,74 @@
+name: Use case question (community norm)
+description: Ask whether a use case sits within the community norm in NORMS.md.
+title: "[use case] "
+labels: ["use-case", "norms", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        `NORMS.md` says: *"If you are uncertain whether your use case falls
+        within the norm, please open an issue or email hello@aidran.ai before
+        you start. We will engage in good faith."*
+
+        This template is for that conversation. Use it when you want a public,
+        archivable answer. If you'd prefer a private exchange, email
+        hello@aidran.ai instead — both paths are fine.
+
+        Reminder of the norm: Apache 2.0 permits broad use including commercial
+        use. We respectfully ask the community not to use this code to build a
+        **competing AI-discourse publication** — a service that generates
+        AI-written analysis of public AI discourse for general audiences.
+        Everything else is welcome.
+  - type: textarea
+    id: what-building
+    attributes:
+      label: What are you building?
+      description: |
+        A few sentences describing your project, who it serves, and how the
+        AIDRAN patterns fit in. Links to existing artifacts help.
+    validations:
+      required: true
+  - type: dropdown
+    id: category
+    attributes:
+      label: Which welcomed-uses category, if any, applies?
+      description: From `NORMS.md`. Pick the closest fit; pick "Not sure" if none do.
+      options:
+        - "Academic research and citation"
+        - "Journalism / investigative use"
+        - "Education and teaching"
+        - "Personal or hobby project"
+        - "Infrastructure adjacency (unrelated AI tools, pipelines, media systems)"
+        - "Unrelated commercial work"
+        - "Not sure — that's why I'm asking"
+    validations:
+      required: true
+  - type: textarea
+    id: concern
+    attributes:
+      label: What specifically are you uncertain about?
+      description: |
+        Be candid. If part of your project overlaps with the discourse-publication
+        space and part does not, name the overlap explicitly — that's the
+        useful conversation.
+    validations:
+      required: true
+  - type: textarea
+    id: audience
+    attributes:
+      label: Who is the audience for the output?
+      description: |
+        Internal team? Paying customers? Researchers? General public? The norm
+        is specifically about AI-written analysis of AI discourse for *general
+        audiences* — audience matters more than business model.
+    validations:
+      required: false
+  - type: checkboxes
+    id: confirm
+    attributes:
+      label: Pre-submission checks
+      options:
+        - label: I have read `NORMS.md` and `NOTICE.md`.
+          required: true
+        - label: I understand the answer is a community norm, not a legal restriction, and that maintainers cannot give legal advice.
+          required: true

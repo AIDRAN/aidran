@@ -1,0 +1,63 @@
+name: Pattern discussion or design question
+description: Discuss one of the published patterns, propose an alternative, or ask a design question.
+title: "[discussion] "
+labels: ["discussion", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this template to discuss the architecture patterns published here:
+        evidence-joined signals, append-only versioned story chains, the
+        antagonist-after-persist quality gate, the pattern-saturation feedback
+        loop, and the source-with-cursor task pattern.
+
+        Great use cases:
+        - "Have you considered X as an alternative to Y?"
+        - "How does this pattern behave under failure mode Z?"
+        - "I'm adapting this pattern in my own project; here's what I learned."
+        - "Citation or related work you may not have seen."
+
+        Not a good fit:
+        - Bug reports → use the bug report template.
+        - Proposals for new editorial prompts, rubrics, thresholds, or voice
+          tuning → see `NOTICE.md`; these are out of scope.
+  - type: dropdown
+    id: pattern
+    attributes:
+      label: Which pattern?
+      options:
+        - "Evidence-joined signals"
+        - "Append-only versioned story chains"
+        - "Antagonist-after-persist quality gate"
+        - "Pattern-saturation feedback loop"
+        - "Source-with-cursor task pattern"
+        - "Multiple / interaction between patterns"
+        - "Something not in the catalog yet"
+    validations:
+      required: true
+  - type: textarea
+    id: topic
+    attributes:
+      label: Topic
+      description: What would you like to discuss?
+    validations:
+      required: true
+  - type: textarea
+    id: prior-art
+    attributes:
+      label: Prior art, citations, related work
+      description: |
+        Papers, blog posts, other open-source projects, or systems you think
+        are relevant. We try to maintain honest citations and welcome pointers
+        we may have missed.
+    validations:
+      required: false
+  - type: textarea
+    id: rough-edge-candidate
+    attributes:
+      label: Is this a candidate for docs/ROUGH-EDGES.md?
+      description: |
+        If you're highlighting a known weakness, scaling limit, or failure mode,
+        say so here. Honest rough-edges callouts are explicitly welcomed.
+    validations:
+      required: false

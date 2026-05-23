@@ -1,0 +1,36 @@
+# Build outputs
+dist/
+build/
+*.tsbuildinfo
+
+# Node
+node_modules/
+.pnpm-store/
+.npm/
+.yarn/
+
+# Editor / OS
+.DS_Store
+.idea/
+*.swp
+*.swo
+
+# Agent / IDE assistant tooling — never publish
+.agents/
+.cursor/
+.codex/
+.claude/
+.serena/
+.aider*
+.continue/
+CLAUDE.md
+AGENTS.md
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+logs/

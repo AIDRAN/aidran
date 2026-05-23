@@ -1,0 +1,24 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Security disclosure (private)
+    url: https://github.com/AIDRAN/aidran/security/advisories/new
+    about: |
+      Please report security vulnerabilities privately through GitHub Security
+      Advisories rather than as a public issue. If GitHub Security Advisories
+      is not available to you, email hello@aidran.ai.
+  - name: Question about a use case under the community norm
+    url: mailto:hello@aidran.ai
+    about: |
+      Unsure whether your use case falls within NORMS.md? Email us before you
+      build. We engage in good faith. You can also open a "Use case question"
+      issue if a public conversation is preferable.
+  - name: Editorial voice, prompts, rubrics, or thresholds
+    url: https://github.com/AIDRAN/aidran/blob/main/NOTICE.md
+    about: |
+      These components are intentionally not in this repository and we cannot
+      accept contributions or feature requests for them. See NOTICE.md.
+  - name: General questions about AIDRAN the product
+    url: https://aidran.ai
+    about: |
+      For questions about AIDRAN the publication (not the scaffold), visit
+      aidran.ai. This repository is the patterns-and-architecture artifact only.

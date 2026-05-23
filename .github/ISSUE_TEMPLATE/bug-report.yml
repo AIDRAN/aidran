@@ -1,0 +1,89 @@
+name: Bug report
+description: A defect in code or documentation that ships in this repository.
+title: "[bug] "
+labels: ["bug", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to file a bug. This template is for defects in
+        what is published here — the scaffold code, the reference adapters, the
+        Hono + Scalar gateway, the Drizzle schemas, or the pattern documentation.
+
+        **Out of scope for this template:**
+        - Editorial prompts, rubrics, calibrated thresholds, exemplars, banned-word
+          lists — these are intentionally not in this repository (see `NOTICE.md`).
+        - Issues reproducible only against the private AIDRAN production system.
+        - Behavior differences between this scaffold and AIDRAN's published output.
+  - type: dropdown
+    id: component
+    attributes:
+      label: Affected component
+      description: Which part of the scaffold does this bug live in?
+      options:
+        - "packages/contracts"
+        - "packages/db (Drizzle schemas)"
+        - "services/ingestion (source adapters / activities)"
+        - "services/editorial (Hono + Scalar gateway)"
+        - "docs/patterns (pattern catalog)"
+        - "METHODOLOGY.md / RESEARCH-QUESTIONS.md / ROUGH-EDGES.md"
+        - "Top-level governance docs (README, CONTRIBUTING, NORMS, NOTICE, etc.)"
+        - "Build, tooling, or CI"
+        - "Not sure"
+    validations:
+      required: true
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: One or two sentences describing the defect.
+      placeholder: "The HN adapter throws when an item has a null `by` field."
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: Reproduction
+      description: |
+        Minimal steps to reproduce. Include commit SHA, Node version, and the
+        commands you ran. A failing test case is the gold standard.
+      placeholder: |
+        1. Check out commit `abcd123`.
+        2. `pnpm -F @aidran/ingestion test hackernews`
+        3. Observe failure in `normalize-record.test.ts`.
+      render: markdown
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+      description: Include error messages, stack traces, or unexpected output.
+      render: shell
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      description: Node version, OS, package manager. `node --version && uname -a`.
+      placeholder: "Node 20.11.1, macOS 14.4, pnpm 9.0.0"
+    validations:
+      required: false
+  - type: checkboxes
+    id: confirm
+    attributes:
+      label: Pre-submission checks
+      options:
+        - label: I have searched existing issues and this is not a duplicate.
+          required: true
+        - label: This bug is in code or docs that ship in this repository, not in AIDRAN's private editorial layer.
+          required: true
+        - label: I have read `CONTRIBUTING.md` and will sign off any PR per the DCO.
+          required: false

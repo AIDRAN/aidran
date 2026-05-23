@@ -1,0 +1,31 @@
+{
+  "name": "@aidran/db",
+  "version": "0.0.0",
+  "description": "AIDRAN platform scaffold — Drizzle ORM schemas for the corpus tables (records, analysis, signals, editorial, search-sync). Public reference; production system uses additional tables not included here.",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./schema": {
+      "types": "./dist/schema/index.d.ts",
+      "import": "./dist/schema/index.js"
+    }
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "build": "tsc"
+  },
+  "dependencies": {
+    "drizzle-orm": "^0.36.0",
+    "postgres": "^3.4.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.9.0",
+    "typescript": "^5.7.2"
+  },
+  "license": "Apache-2.0"
+}
