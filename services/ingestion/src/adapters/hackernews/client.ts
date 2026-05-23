@@ -8,8 +8,24 @@
  * Docs: https://github.com/HackerNews/API
  */
 
-import { fetchWithTimeout } from '@aidran/config';
 import type { HnItem, HnStoryList } from './types.js';
+
+// Inline fetch helper: wraps global fetch with a hard per-request deadline.
+// In the production system this lives in @aidran/config (not published here).
+const DEFAULT_FETCH_TIMEOUT_MS = 30_000;
+
+async function fetchWithTimeout(
+  input: string | URL,
+  init: RequestInit = {},
+  timeoutMs: number = DEFAULT_FETCH_TIMEOUT_MS,
+): Promise<Response> {
+  const timeoutSignal = AbortSignal.timeout(timeoutMs);
+  const signal =
+    init.signal != null
+      ? AbortSignal.any([init.signal, timeoutSignal])
+      : timeoutSignal;
+  return fetch(input, { ...init, signal });
+}
 
 const HN_BASE = 'https://hacker-news.firebaseio.com/v0';
 
