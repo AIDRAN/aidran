@@ -36,9 +36,9 @@ export async function runVerify(): Promise<void> {
     process.stdout.write(`aidran: found ${found.size}/${EXPECTED_TABLES.length} expected tables\n`);
 
     if (missing.length > 0) {
-      process.stdout.write(`aidran: missing tables: ${missing.join(', ')}\n`);
-      process.stdout.write("aidran: run 'aidran migrate' to apply schema\n");
-      process.exit(1);
+      throw new Error(
+        `missing tables: ${missing.join(', ')} — run 'aidran migrate' to apply schema`,
+      );
     }
 
     process.stdout.write('aidran: schema looks healthy ✓\n');

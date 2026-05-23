@@ -5,28 +5,34 @@ One-install convenience package for the [AIDRAN](https://aidran.ai) discourse-in
 ## Install
 
 ```sh
-npm install aidran
-# or
-pnpm add aidran
+npm install -g aidran
+# or:  pnpm add -g aidran
 ```
+
+Global install puts the `aidran` binary on your PATH so you can run it as a bare command. Prefer a project-local install? Use `npm install aidran` and invoke via `npx aidran`.
 
 ## What you get
 
-After install:
-
-- `aidran` binary on your PATH (delegates to [`@aidran/cli`](https://www.npmjs.com/package/@aidran/cli))
+- The `aidran` binary on your PATH — interactive wizard + non-interactive subcommands
 - TypeScript types and Zod schemas from [`@aidran/contracts`](https://www.npmjs.com/package/@aidran/contracts)
 - Drizzle ORM schemas + bundled migrations from [`@aidran/db`](https://www.npmjs.com/package/@aidran/db)
 
 ## Quickstart
 
 ```sh
-mkdir my-aidran && cd my-aidran
-npm install aidran
-npx aidran init                 # writes .env.example + drizzle.config.ts
-cp .env.example .env            # fill in DATABASE_URL and AIDRAN_API_KEY
-npx aidran migrate              # creates AIDRAN tables in your Postgres
-npx aidran verify               # sanity-check the schema
+npm install -g aidran
+aidran                  # launches the interactive setup wizard
+```
+
+The wizard prompts for `DATABASE_URL`, generates an `AIDRAN_API_KEY`, writes config files, applies the migrations, and verifies the schema in one flow.
+
+Already past the wizard? The same commands work directly:
+
+```sh
+aidran init       # scaffold .env.example + drizzle.config.ts
+aidran migrate    # apply migrations to $DATABASE_URL
+aidran verify     # confirm schema is healthy
+aidran help       # see all commands
 ```
 
 ## Using the types and schemas

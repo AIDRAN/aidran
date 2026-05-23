@@ -1,19 +1,33 @@
 # @aidran/cli
 
-CLI for the [AIDRAN](https://aidran.ai) discourse-intelligence platform. Applies the `@aidran/db` migrations to your Postgres database and scaffolds the minimal config needed to consume AIDRAN packages.
+The `aidran` binary — interactive setup wizard and non-interactive subcommands for the [AIDRAN](https://aidran.ai) discourse-intelligence platform.
 
 ## Install
 
 ```sh
-# As a one-off (no install):
-npx @aidran/cli help
-
-# Or as a project dev-dependency:
-pnpm add -D @aidran/cli
-npm install --save-dev @aidran/cli
+npm install -g @aidran/cli
+# or:  pnpm add -g @aidran/cli
 ```
 
-## Commands
+After installing, run `aidran` (no args) to launch the interactive wizard.
+
+Prefer to skip the global install? Use the convenience meta-package or `npx`:
+
+```sh
+npm install -g aidran     # meta-package — also exports types and schemas
+npx @aidran/cli           # no install, one-off invocation
+```
+
+## Wizard
+
+Running `aidran` with no arguments in a terminal launches an interactive wizard with the AIDRAN logo, a menu, and guided prompts. It can:
+
+- Generate a secure random `AIDRAN_API_KEY`
+- Write `.env`, `.env.example`, and `drizzle.config.ts`
+- Apply migrations to your Postgres
+- Verify the schema
+
+## Commands (non-interactive)
 
 ```sh
 aidran init       # Write .env.example and drizzle.config.ts to cwd
@@ -22,21 +36,13 @@ aidran verify     # Sanity-check the schema against $DATABASE_URL
 aidran help       # Show usage
 ```
 
-## Zero-to-running quickstart
-
-```sh
-mkdir my-aidran-project && cd my-aidran-project
-npx @aidran/cli init                       # writes .env.example + drizzle.config.ts
-cp .env.example .env                       # fill in DATABASE_URL
-DATABASE_URL='postgres://...' npx @aidran/cli migrate
-DATABASE_URL='postgres://...' npx @aidran/cli verify
-```
-
-After `migrate`, your Postgres has all the AIDRAN corpus tables (`records`, `stories`, `signals`, `topics`, etc.). You can then `import { records, stories } from '@aidran/db'` in your application and query them with full type safety via Drizzle.
+These run directly without prompts — suitable for CI, scripts, or anyone who already knows what they want.
 
 ## What it ships
 
-The package bundles the AIDRAN migrations folder (the same SQL the production system runs) and uses `drizzle-orm/node-postgres/migrator` to apply them. Idempotent — drizzle tracks applied migrations in a `drizzle.__drizzle_migrations` table.
+The package bundles the AIDRAN migrations folder (the same SQL the production system runs, via the `@aidran/db` dependency) and uses `drizzle-orm/node-postgres/migrator` to apply them. Idempotent — drizzle tracks applied migrations in a `drizzle.__drizzle_migrations` table.
+
+The interactive UI uses [`@clack/prompts`](https://www.npmjs.com/package/@clack/prompts) for the wizard and [`picocolors`](https://www.npmjs.com/package/picocolors) for terminal styling. Both detect non-TTY contexts automatically and degrade to plain output.
 
 ## Status
 

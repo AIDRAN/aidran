@@ -1,6 +1,6 @@
 {
   "name": "aidran",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "AIDRAN — one install for the discourse-intelligence platform. Re-exports @aidran/contracts and @aidran/db, plus the @aidran/cli binary as `aidran`.",
   "keywords": [
     "aidran",

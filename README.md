@@ -6,42 +6,57 @@ A curated public scaffold of patterns and infrastructure from [AIDRAN](https://a
 
 ## Quickstart
 
-You need Node 22+, pnpm 9+, and a Postgres database (local or hosted).
+You need Node 22+ and a Postgres database (local or hosted).
 
 ```sh
-# 1. Get the schemas into your database
-npx @aidran/cli init                    # writes .env.example and drizzle.config.ts
-cp .env.example .env                    # fill in DATABASE_URL and AIDRAN_API_KEY
-export $(grep -v '^#' .env | xargs)     # or use direnv / dotenv
-npx @aidran/cli migrate                 # creates AIDRAN tables in your Postgres
-npx @aidran/cli verify                  # confirms schema is healthy
+npm install -g aidran     # one tool, on your PATH
+aidran                    # launches the interactive setup wizard
 ```
 
-That gives you the corpus tables. To run the reference ingestion and delivery layers end-to-end, clone this repo:
+The wizard prompts you for `DATABASE_URL`, generates an `AIDRAN_API_KEY`, writes `.env` and `drizzle.config.ts`, applies the migrations to your Postgres, and verifies the schema. That's the entire setup.
+
+Already past the wizard? The same commands work non-interactively:
 
 ```sh
-# 2. Run the reference HackerNews ingestion (one-shot)
-git clone https://github.com/AIDRAN/aidran.git aidran-public
-cd aidran-public
+aidran init       # scaffold .env.example + drizzle.config.ts
+aidran migrate    # apply @aidran/db migrations to $DATABASE_URL
+aidran verify     # check that the schema is healthy
+aidran help       # see all commands
+```
+
+No-install alternative:
+
+```sh
+npx aidran        # same wizard, no global install
+```
+
+### Running the reference ingestion and delivery layers
+
+The CLI gets schemas into your database. To watch records flow in and read them back via HTTP, clone this repo:
+
+```sh
+git clone https://github.com/AIDRAN/aidran.git && cd aidran
 pnpm install
+
+# Reference HackerNews ingestion (one-shot)
 DATABASE_URL='...' pnpm --filter @aidran/ingestion run once
 
-# 3. Start the reference delivery read API on :3000
+# Reference delivery read API on :3000
 DATABASE_URL='...' AIDRAN_API_KEY='...' pnpm --filter @aidran/delivery run start
 
-# 4. Query
-curl -s http://localhost:3000/healthz
-curl -s -H "Authorization: Bearer $AIDRAN_API_KEY" http://localhost:3000/v1/records | jq
-curl -s -H "Authorization: Bearer $AIDRAN_API_KEY" http://localhost:3000/v1/stories | jq
+# Query it
+curl -sH "Authorization: Bearer $AIDRAN_API_KEY" http://localhost:3000/v1/records | jq
+curl -sH "Authorization: Bearer $AIDRAN_API_KEY" http://localhost:3000/v1/stories | jq
 ```
 
 ## What lives here
 
-**Published to npm under [`@aidran`](https://www.npmjs.com/org/aidran):**
+**Published to npm:**
 
+- [`aidran`](https://www.npmjs.com/package/aidran) — one-install meta-package; provides the `aidran` binary and re-exports everything below
 - [`@aidran/contracts`](https://www.npmjs.com/package/@aidran/contracts) — shared TypeScript types and Zod schemas for wire protocols (events, API DTOs, webhooks, tier policies, errors)
 - [`@aidran/db`](https://www.npmjs.com/package/@aidran/db) — Drizzle ORM schemas and bundled SQL migrations for the corpus tables
-- [`@aidran/cli`](https://www.npmjs.com/package/@aidran/cli) — applies the migrations and scaffolds consumer projects
+- [`@aidran/cli`](https://www.npmjs.com/package/@aidran/cli) — interactive wizard + non-interactive subcommands; applies migrations and scaffolds projects
 
 **In the monorepo as runnable reference (not published):**
 

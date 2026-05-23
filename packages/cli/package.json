@@ -1,6 +1,6 @@
 {
   "name": "@aidran/cli",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "AIDRAN — CLI for applying the @aidran/db migrations and scaffolding consumer projects",
   "keywords": [
     "aidran",
@@ -40,8 +40,10 @@
   },
   "dependencies": {
     "@aidran/db": "workspace:*",
+    "@clack/prompts": "^0.8.0",
     "drizzle-orm": "^0.36.0",
-    "pg": "^8.13.0"
+    "pg": "^8.13.0",
+    "picocolors": "^1.1.0"
   },
   "devDependencies": {
     "@types/node": "^22.9.0",
