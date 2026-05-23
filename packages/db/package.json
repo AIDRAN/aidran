@@ -1,6 +1,6 @@
 {
   "name": "@aidran/db",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "description": "AIDRAN — Drizzle ORM schemas plus generated SQL migrations for the corpus tables (records, analysis, signals, editorial, search-sync). Public reference; production system uses additional tables not included here.",
   "keywords": [
     "aidran",

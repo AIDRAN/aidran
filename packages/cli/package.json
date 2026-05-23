@@ -1,6 +1,6 @@
 {
   "name": "@aidran/cli",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "description": "AIDRAN — CLI for applying the @aidran/db migrations and scaffolding consumer projects",
   "keywords": [
     "aidran",
