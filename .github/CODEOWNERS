@@ -1,0 +1,42 @@
+# CODEOWNERS — controls automatic review assignment for pull requests.
+#
+# Syntax: <path pattern> <owner1> [<owner2> ...]
+# Patterns matched later in the file override earlier ones.
+# Reference: https://docs.github.com/en/repositories/managing-your-repositories-settings-and-features/customizing-your-repository/about-code-owners
+#
+# Today this repository is maintained by a single owner. As contributors join
+# the project, add their handles next to the paths they own — start with the
+# less-sensitive paths (a single source adapter, a single pattern doc) and
+# only widen ownership over time. Governance files (LICENSE, NOTICE,
+# TRADEMARKS, NORMS, SECURITY, .github/) stay narrowly owned.
+
+# ── Default owner for all paths ──────────────────────────────────────────
+* @joshuarweaver
+
+# ── Repository governance ────────────────────────────────────────────────
+# These files set the legal, security, and community-conduct baseline for
+# the project. Changes here propagate to every contributor and should be
+# reviewed with extra care.
+/LICENSE                @joshuarweaver
+/NOTICE                 @joshuarweaver
+/NOTICE.md              @joshuarweaver
+/TRADEMARKS.md          @joshuarweaver
+/NORMS.md               @joshuarweaver
+/SECURITY.md            @joshuarweaver
+/CODE_OF_CONDUCT.md     @joshuarweaver
+/CONTRIBUTING.md        @joshuarweaver
+/README.md              @joshuarweaver
+/.github/               @joshuarweaver
+
+# ── Shared contracts and schemas ─────────────────────────────────────────
+# Changes here ripple to every consumer of the scaffold. Cross-review with
+# the service owners that depend on the affected types.
+/packages/contracts/    @joshuarweaver
+/packages/db/           @joshuarweaver
+
+# ── Methodology and pattern documentation ────────────────────────────────
+# Long-form public-facing prose that explains the AIDRAN approach. Editorial
+# accuracy is load-bearing here.
+/METHODOLOGY.md         @joshuarweaver
+/COMPARISON.md          @joshuarweaver
+/docs/                  @joshuarweaver
