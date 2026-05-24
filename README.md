@@ -1,4 +1,4 @@
-# AIDRAN Platform Scaffold
+# AIDRAN
 
 A curated public scaffold of patterns and infrastructure from [AIDRAN](https://aidran.ai), the AI-discourse intelligence platform.
 
