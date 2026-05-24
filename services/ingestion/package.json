@@ -14,7 +14,7 @@
   "dependencies": {
     "@aidran/contracts": "workspace:*",
     "@aidran/db": "workspace:*",
-    "drizzle-orm": "^0.36.4",
+    "drizzle-orm": "^0.45.2",
     "pg": "^8.13.0",
     "zod": "^3.23.8"
   },
