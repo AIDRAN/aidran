@@ -16,7 +16,7 @@
     "@aidran/db": "workspace:*",
     "drizzle-orm": "^0.45.2",
     "pg": "^8.13.0",
-    "zod": "^3.23.8"
+    "zod": "^4.4.3"
   },
   "devDependencies": {
     "@types/node": "^22.9.0",
