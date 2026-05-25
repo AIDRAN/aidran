@@ -14,7 +14,7 @@
   "dependencies": {
     "@aidran/contracts": "workspace:*",
     "@aidran/db": "workspace:*",
-    "@hono/node-server": "^1.13.7",
+    "@hono/node-server": "^2.0.4",
     "drizzle-orm": "^0.45.2",
     "hono": "^4.6.13",
     "pg": "^8.13.0"
