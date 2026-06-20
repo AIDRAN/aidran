@@ -16,7 +16,7 @@
     "@aidran/db": "workspace:*",
     "@hono/node-server": "^1.13.7",
     "drizzle-orm": "^0.45.2",
-    "hono": "^4.6.13",
+    "hono": "^4.12.25",
     "pg": "^8.13.0"
   },
   "devDependencies": {
