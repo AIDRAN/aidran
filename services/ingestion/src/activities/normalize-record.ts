@@ -41,7 +41,11 @@ function deriveCategory(source: SourceKind): 'discourse' | 'article' {
   return ARTICLE_SOURCES.has(source) ? 'article' : 'discourse';
 }
 
-/** Best-effort publisher domain for article rows (e.g. arxiv.org). */
+/**
+ * Best-effort publisher domain from an off-site url (e.g. arxiv.org).
+ * Returns null when the row has no off-site url — a self-post such as Ask HN,
+ * or a comment — so those rows keep a null publisher.
+ */
 function derivePublisher(url: string | null | undefined): string | null {
   if (!url) return null;
   try {
@@ -57,6 +61,9 @@ function derivePublisher(url: string | null | undefined): string | null {
  * as that would make the activity non-deterministic (different on retry).
  *
  * category/publisher are derived deterministically from source/url.
+ * publisher comes from the row url for both categories — a discourse row such
+ * as a Hacker News link story cites a real off-site publisher too. Only rows
+ * with no off-site url (self-posts, comments) keep a null publisher.
  */
 export function toNewRecord(item: NormalizedItem): NewRecord {
   const category = deriveCategory(item.source);
@@ -64,7 +71,7 @@ export function toNewRecord(item: NormalizedItem): NewRecord {
     kind: item.source,
     sourceId: item.sourceId ?? null,
     category,
-    publisher: category === 'article' ? derivePublisher(item.url) : null,
+    publisher: derivePublisher(item.url),
     contentType: item.contentType,
     externalId: item.externalId,
     title: item.title ?? null,
