@@ -1,14 +1,19 @@
 /**
  * Stories routes — read-only access to generated narratives.
  *
- *   GET /v1/stories?limit=25&cursor=<generatedAt-ISO>   active stories newest-first
- *   GET /v1/stories/:id                                  single story with citations
+ *   GET /v1/stories?limit=25&cursor=<generatedAt-ISO>   public stories newest-first
+ *   GET /v1/stories/:id                                  single public story with citations
+ *
+ * "Public" is defined by `storyPublicFilter` — see story-visibility.ts. A
+ * freshly generated story whose citation rows do not exist yet is withheld
+ * until its citation pass has had a chance to run.
  */
 
 import { Hono } from 'hono';
 import { desc, eq, and, lt } from 'drizzle-orm';
 import { stories, storyCitations } from '@aidran/db';
 import type { Database } from '@aidran/db';
+import { storyPublicFilter } from '~/story-visibility.js';
 
 const DEFAULT_LIMIT = 25;
 const MAX_LIMIT = 100;
@@ -34,7 +39,8 @@ export function storiesRoutes(db: Database): Hono {
     const cursor = parseCursor(c.req.query('cursor'));
 
     const cursorFilter = cursor ? lt(stories.generatedAt, cursor) : undefined;
-    const where = cursorFilter ? and(eq(stories.active, true), cursorFilter) : eq(stories.active, true);
+    const publicFilter = storyPublicFilter();
+    const where = cursorFilter ? and(publicFilter, cursorFilter) : publicFilter;
 
     const rows = await db
       .select()
@@ -53,7 +59,11 @@ export function storiesRoutes(db: Database): Hono {
 
   app.get('/:id', async (c) => {
     const id = c.req.param('id');
-    const [story] = await db.select().from(stories).where(eq(stories.id, id)).limit(1);
+    const [story] = await db
+      .select()
+      .from(stories)
+      .where(and(eq(stories.id, id), storyPublicFilter()))
+      .limit(1);
     if (!story) return c.json({ error: 'not_found' }, 404);
 
     const citations = await db
